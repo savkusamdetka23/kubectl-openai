@@ -1,0 +1,22 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-demo-pod
+  namespace: demo
+  labels:
+    app: demo
+    run: my-demo-pod
+spec:
+  containers:
+  - name: my-demo-container
+    image: gcr.io/translatebot-405321/k8s-k3s/demo:v1.0.0
+    ports:
+    - name: http
+      containerPort: 8000
+    livenessProbe:
+      httpGet:
+        path: /
+        port: http
+      initialDelaySeconds: 10
+      periodSeconds: 5

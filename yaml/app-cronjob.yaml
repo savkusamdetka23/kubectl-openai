@@ -1,0 +1,21 @@
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: my-cronjob
+  labels:
+    app: demo
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: demo
+        spec:
+          containers:
+          - name: my-cronjob-container
+            image: gcr.io/translatebot-405321/k8s-k3s/demo-job:v1.0.0
+            # Add container specifications as needed
+          restartPolicy: OnFailure

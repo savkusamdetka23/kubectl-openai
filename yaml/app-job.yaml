@@ -1,0 +1,20 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rsync-job
+  labels:
+    app: demo
+spec:
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+      - name: rsync-container
+        image: ubuntu:latest
+        command: ["/bin/sh", "-c"]
+        args:
+        - rsync -av /source-directory/ /destination-directory/
+      restartPolicy: Never
